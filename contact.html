@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- FIX: was "initial initial-scale 1" -->
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+</head>
+
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="#" class="logo"> </a>
+            <!--hamburger-->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./index.html">Home</a></li>
+                
+                
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+                <li><a href="./service.html">Service</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <center><h3>Contact Form</h3></center>
+
+    <div class="container" id="container">
+        <form>
+            <input type="text" id="fname" name="firstname" placeholder="Your Name...">
+            <input type="text" id="lname" name="lastname" placeholder="Your Last Name..."> <!-- FIX: "last name" → "lastname" (spaces invalid in name attribute) -->
+            <input id="ename" type="email" name="email" placeholder="Your email.."> <!-- FIX: type="text" → type="email" -->
+            <textarea id="subject" name="subject" placeholder="Write something.." style="height: 200px;"></textarea>
+            <center><input type="submit" value="Submit" id="submit"></center> <!-- FIX: missing closing > on input tag -->
+        </form>
+    </div>
+
+    <footer> <!-- FIX: moved footer inside </body> -->
+        <div class="footer-logo">
+            <h2>NextLevel Marketing</h2>
+            <p>Elevating Brands Beyond The Ordinary</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p> </p>
+        </div>
+    </footer>
+
+
+       
+</body>
+<script src="./javascript/script.js"></script>
+</html>

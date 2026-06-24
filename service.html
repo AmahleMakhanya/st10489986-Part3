@@ -1,101 +1,343 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/stylesheet.css">
-    <title>NextLevel Marketing</title>
-    <link rel="icon" href="./Icon./icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — NextLevel Marketing</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f5ff;
+      color: #222;
+    }
+
+    /* ── Nav ── */
+    nav { background: #1a1a2e; position: sticky; top: 0; z-index: 100; }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    .logo::after { content: "NextLevel Marketing"; }
+
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links a { color: #ccc; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 25px; height: 2px; background: #fff; transition: all 0.3s; }
+
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        background: #1a1a2e; position: absolute; top: 60px;
+        left: 0; width: 100%; padding: 1rem 2rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0.6rem 0; border-bottom: 1px solid #333; }
+    }
+
+    /* ── Hero Banner ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #534AB7 100%);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      margin-bottom: 1.2rem;
+      color: #e0d9ff;
+    }
+
+    .hero h1 { font-size: 2.4rem; margin-bottom: 0.8rem; font-weight: 700; }
+    .hero p   { font-size: 1.05rem; color: #c9c3f5; max-width: 520px; margin: 0 auto; }
+
+    /* ── Services Grid ── */
+    .services-section {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 5rem;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #534AB7;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #777;
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(83,74,183,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(83,74,183,0.18);
+    }
+
+    .card-icon-wrap {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .card-icon-wrap.purple { background: #EEEDFE; }
+    .card-icon-wrap.teal   { background: #E1F5EE; }
+    .card-icon-wrap.coral  { background: #FAECE7; }
+
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+    .card-number {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-number.purple { color: #534AB7; }
+    .card-number.teal   { color: #0F6E56; }
+    .card-number.coral  { color: #993C1D; }
+
+    .card-body h2 {
+      font-size: 1.2rem;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-body p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-btn {
+      align-self: flex-start;
+      padding: 0.5rem 1.4rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .card-btn:hover { background: #534AB7; transform: scale(1.04); }
+
+    /* ── CTA strip ── */
+    .cta-strip {
+      background: #1a1a2e;
+      text-align: center;
+      padding: 3.5rem 2rem;
+      color: #fff;
+    }
+
+    .cta-strip h2 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+    .cta-strip p  { color: #aaa; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 0.7rem 2rem;
+      background: #534AB7;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .cta-btn:hover { background: #7F77DD; transform: scale(1.04); }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      color: #ccc;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2.5rem 3rem;
+    }
+
+    footer h2 { color: #fff; font-size: 1.15rem; margin-bottom: 0.3rem; }
+    footer h3 { color: #fff; font-size: 1rem; margin-bottom: 0.8rem; }
+    footer p  { font-size: 0.88rem; color: #aaa; }
+
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.4rem; }
+    .footer-links a  { color: #aaa; text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+
+    .footer-bottom {
+      background: #0d0d1a;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="navbar">
-            <a href="#" class="logo"> </a>
-            <!--hamburger-->
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="./index.html">Home</a></li>
 
-               
-                
-                <li><a href="./About.html">About</a></li>
-                <li><a href="./Contact.html">Contact</a></li>
-                <li> <a href="./service.html"> service</a></li>
-            </ul>
+  <!-- Nav -->
+  <nav>
+    <div class="navbar">
+      <a href="index.html" class="logo"></a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="service.html" class="active">Services</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">What we offer</div>
+    <h1>Our Services</h1>
+    <p>Everything your brand needs to grow, connect, and stand out in today's world.</p>
+  </div>
+
+  <!-- Cards -->
+  <section class="services-section">
+    <p class="section-label">Explore</p>
+    <h2 class="section-title">How we take you to the next level</h2>
+    <p class="section-sub">Three core pillars that drive real results for your brand.</p>
+
+    <div class="cards-grid">
+
+      <div class="service-card">
+        <div class="card-icon-wrap purple">📱</div>
+        <div class="card-body">
+          <p class="card-number purple">01 — Social Media</p>
+          <h2>Social Media Marketing</h2>
+          <p>NextLevel Marketing offers expert social media strategy that puts your brand in front of the right audience and keeps them engaged — consistently.</p>
+          <button class="card-btn" onclick="window.location='Contact.html'">Get in touch</button>
         </div>
-
-    </nav>
-
-
-<center>
-  <h2>Responsive "Meet The Team" Section</h2>
-<p>Resize the browser window to see the effect.</p>
-<br>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <img src="./Images/image5.jpeg"  width="50%" height="50%">
-      <div class="container">
-        <h2>1/3 Services</h2>
-        <p class="title">Social Media Marketing</p>
-        <p>NextLevel Marketing Agency offers expert level social media marketing that takes your brand to the NextLevel.</p>
-        <p><button class="button">Contact</button></p>
       </div>
+
+      <div class="service-card">
+        <div class="card-icon-wrap teal">🤝</div>
+        <div class="card-body">
+          <p class="card-number teal">02 — Collaboration</p>
+          <h2>Team Collaboration</h2>
+          <p>We believe teamwork makes the dream work. NextLevel partners closely with your team to align creative vision, strategy, and execution every step of the way.</p>
+          <button class="card-btn" onclick="window.location='Contact.html'">Get in touch</button>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-icon-wrap coral">📈</div>
+        <div class="card-body">
+          <p class="card-number coral">03 — Growth</p>
+          <h2>Results &amp; Growth</h2>
+          <p>From awareness to conversions, NextLevel is focused on one thing: measurable growth. We take each client beyond expectations, every single time.</p>
+          <button class="card-btn" onclick="window.location='Contact.html'">Get in touch</button>
+        </div>
+      </div>
+
     </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>Ready to go to the NextLevel?</h2>
+    <p>Let's talk about how we can grow your brand together.</p>
+    <a class="cta-btn" href="Contact.html">Contact us today</a>
   </div>
 
-  <div class="column">
-    <div class="card">
-      <img src="./Images/image6.jpeg" height="50%" width="50%">
-      <div class="container">
-        <h2>2/3 services</h2>
-        <p class="title">Team Collaboration</p>
-        <p>NextLevel Marketing acknolwedgesthe importance of coming together as a team, team work makes the dreamwork</p>
-        <p><button class="button">Contact</button></p>
-      </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <h2>NextLevel Marketing</h2>
+      <p>Elevating Brands Beyond The Ordinary</p>
     </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <img src="./Images/image7.jpg" height="50%" width="50%">
-      <div class="container">
-        <h2>3/3 services</h2>
-        <p class="title">Results and Growth </p>
-        <p>NextLevel emphasizes on taking each and every client to the NextLevel </p>
-        <p><button class="button">Contact</button></p>
-      </div>
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="Contact.html">Contact Us</a></li>
+      </ul>
     </div>
-  </div>
-</div>
-</center>
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p>hello@nextlevelmarketing.com</p>
+      <p>+1 (800) 555-0100</p>
+    </div>
+  </footer>
+  <div class="footer-bottom">© 2024 NextLevel Marketing. All rights reserved.</div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
 
 </body>
-
-<footer>
-    <div class="footer-logo">
-        <h2>NextLevel Marketing</h2>
-        <p>Elevating Brands Beyond The Ordinary </p>
-    </div>
-
-    <div class="footer-links">
-        <h3>Quick links</h3>
-        <ul>
-            <li><a href="#"> Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact Us </a> </li>
-        </ul>
-    </div>
-
-    <div class="footer-contact">
-        <h3>Contact Us</h3>
-        <p> </p>
-    </div>
-</footer>
-<script src="./javascript/script.js"></script>
 </html>
